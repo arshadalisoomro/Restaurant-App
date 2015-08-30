@@ -1,7 +1,11 @@
+html, body {
+  width: auto !important;
+  overflow-x: hidden !important;
+}
+
 body {
   background-color: #ECE9E6;
   font-family: 'Alegreya', serif;
-  overflow-x: hidden;
   min-height: 1000px;
 }
 
