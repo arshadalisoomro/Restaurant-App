@@ -2,7 +2,7 @@
 <% counter = 0 %>
 
 <div class="row">
-  <% @tables.each do |table| %>
+  <% @tables.sort.each do |table| %>
     <% if @parties.include?(table.id) %>
     <% party = Party.where(:table_id => table.id, :has_paid => false)[0] %>
     <% partyTotal = 0 %>
@@ -13,7 +13,10 @@
             <div class="row waiter-exists party-waiter-name">
               <div class="form-group party-waiter-select">
               <select class="form-control" name="party[waiter_id]" required>
-                <% Waiter.all.each do |waiter| %>
+                <% if Waiter.find(party.waiter_id).status == 'fired' %>
+                  <option value="<%= party.waiter_id %>" selected><%= Waiter.find(party.waiter_id).name %></option>
+                <% end %>
+                <% Waiter.where(:status => 'active').each do |waiter| %>
                   <% if waiter.id == party.waiter_id  %>
                     <option value="<%= waiter.id %>" selected><%= waiter.name %></option>
                   <% else %>
@@ -25,7 +28,7 @@
             </div>
             <div class="row party-header">
               Table<select name="party[table_id]" onchange="this.form.submit()">
-                <% Table.all.each do |table| %>
+                <% Table.where(:status => 'active').each do |table| %>
                   <% if table.id == party.table_id %>
                     <option value="<%= table.id %>" selected><%= table.id %></option>
                   <% elsif @parties.include?(table.id) == false %>
@@ -55,7 +58,7 @@
           <% PartyOrder.where(:party_id => Party.where(:table_id => table.id, :has_paid => false)[0], :has_paid => false).each do |order| %>
             <form class="swipe-order" action="/orders/<%= order.id %>" method="post" role="form">
               <input type="hidden" name="_method" value="delete">
-                <p data-toggle="tooltip" data-placement="left" title="Swipe to remove order">
+                <p data-toggle="tooltip" data-placement="auto" title="Swipe to remove order">
                   <%= @foods.find(order.food_id).name %>
                   <span class="panel-right">
                     $<%= sprintf('%.2f', @foods.find(order.food_id).price) %>
@@ -149,7 +152,7 @@
                 <div class="form-group party-waiter-select">
                   <select class="form-control" name="party[waiter_id]" required>
                     <option value="" selected>Open</option>
-                    <% Waiter.all.each do |waiter| %>
+                    <% Waiter.where(:status => 'active').each do |waiter| %>
                       <option value="<%= waiter.id %>"><%= waiter.name %></option>
                     <% end %>
                   </select>

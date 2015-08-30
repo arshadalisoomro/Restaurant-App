@@ -1,17 +1,14 @@
 $(document).ready(function() {
 
-  $('body').css('opacity', '0').fadeTo(400, 1, 'swing');
+  var taglines = ["We're not racists. We just don't serve Chinese food.", "You definitely won't find any Chinese food here!", "Your average non-Chinese fusion restaurant.", "We're mostly a pizzeria.", "Just like Mom used to make, unless she made Chinese food.", "An equal opportunity employer."];
 
-  $(".nav").find(".active").removeClass("active");
+  var tagline = $('<p>').html(taglines[Math.floor(Math.random() * taglines.length)]);
+
+  $('.jumbotron').append(tagline);
+
+  $('body').css('opacity', '0').fadeTo(800, 1, 'swing');
 
   $('ul.nav > li > a[href="' + (document.location.pathname[0] + document.location.pathname.split('/')[1]) + '"]').parent().addClass('active');
-
-  $('.panel-heading').on('click', function() {
-    $(this).find('select').addClass('focusedSelect');
-    $(this).on('blur', function() { // this isn't working the way i want it to
-      $(this).find('select').removeClass('focusedSelect');
-    })
-  });
 
   $('.add-food-course').selectize({create: true});
 
@@ -21,6 +18,13 @@ $(document).ready(function() {
     $('.post-edit').css({display: 'inline-block'});
   });
 
+  $('.prime-hire').on('click', function(e) {
+    e.preventDefault();
+    $(this).css({display: 'none'});
+    $('.new-hire').css({display: 'block'});
+    $('.post-hire').css({display: 'block'});
+  })
+
   $('.courseListing').click(function() {
     $(this).toggleClass('food-active');
   });
@@ -29,14 +33,24 @@ $(document).ready(function() {
 
   $('.swipe-order').on('swipeleft', function() {
     $('.overlay').css({display: 'block', zIndex: '1000'});
-    // $('body').css('opacity', '1').fadeTo(800, 0.25, 'swing');
     $(this).animate({marginBottom: '-30px'}, 300).addClass('slide fade out');
     $(this).submit();
   });
 
   $('.swipe-order').on('swiperight', function() {
     $('.overlay').css({display: 'block', zIndex: '1000'});
-    // $('body').css('opacity', '1').fadeTo(800, 0.25, 'swing');
+    $(this).animate({marginBottom: '-30px'}).addClass('slide fade out reverse');
+    $(this).submit();
+  });
+
+  $('.swipe-waiter').on('swipeleft', function() {
+    $('.overlay').css({display: 'block', zIndex: '1000'});
+    $(this).animate({marginBottom: '-30px'}, 300).addClass('slide fade out');
+    $(this).submit();
+  });
+
+  $('.swipe-waiter').on('swiperight', function() {
+    $('.overlay').css({display: 'block', zIndex: '1000'});
     $(this).animate({marginBottom: '-30px'}).addClass('slide fade out reverse');
     $(this).submit();
   });

@@ -1,0 +1,92 @@
+<h4 class="page-title">Admin</h4>
+
+<div class="row">
+
+  <div class="col-sm-4 panel panel-default">
+    <div class="panel-heading control-panel-heading">Waiters</div>
+    <div class="panel-info clearfix">
+      <% Waiter.where(:status => 'active').each do |waiter| %>
+      <form class="swipe-waiter" action="/admin/waiters/<%= waiter.id %>" method="post" role="form">
+        <input type="hidden" name="_method" value="delete">
+          <% waiter_tables = 0 %>
+          <% Party.where(:waiter_id => waiter.id, :has_paid => false).each {|party| waiter_tables += 1} %>
+        <p data-toggle="tooltip" data-placement="auto" title="Swipe to fire waiter"><%= waiter.name %>
+        <span class="panel-right">Tables: <%= waiter_tables %></span></p>
+
+      </form>
+
+      <% end %>
+      <form class="form-group" action="/admin/waiters" method="post">
+        <input class="form-control new-hire" type="text" name="waiter[name]" placeholder="Name" required>
+        <div class="btn prime-hire">New</div>
+        <input class="btn post-hire" type="submit" value="Hire">
+      </form>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="col-sm-4 panel panel-default">
+    <div class="panel-heading control-panel-heading">Tables</div>
+    <div class="panel-info clearfix">
+      <% table_count = 0 %>
+      <% Table.where(:status => 'active').each do |table| %>
+        <% table_count += 1 %>
+      <% end %>
+      <% occupied_tables = Party.where(:has_paid => false).length %>
+        <p>Total:
+        <span class="panel-right"><%= table_count %></span></p>
+        <p>Occupied:
+        <span class="panel-right"><%= occupied_tables %></span></p>
+        <p>Open:
+        <span class="panel-right"><%= table_count - occupied_tables %></span></p>
+
+      <form class="form-group" action="/admin/tables" method="post">
+        <input class="btn add-table" type="submit" value="New">
+      </form>
+
+      <form class="form-group" action="/admin/tables" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input class="btn remove-table" type="submit" value="Remove">
+      </form>
+
+    </div>
+  </div>
+
+    <div class="col-sm-4 panel panel-default">
+      <div class="panel-heading control-panel-heading">Kitchen</div>
+      <div class="panel-info clearfix">
+
+        <% current_orders = PartyOrder.where(:cooked => false).length %>
+
+        <p>Current orders:
+          <span class="panel-right"><%=current_orders %></span>
+        </p>
+
+        <% delayed_orders = 0 %>
+
+        <% PartyOrder.where(:cooked => false).each do |order| %>
+          <% time_since_order = ((Time.now.to_i - order.created_at.to_i) / 60) %>
+            <% if time_since_order > 30 %>
+              <% delayed_orders += 1 %>
+            <% end %>
+          <% end %>
+
+        <p>Delayed orders:
+          <span class="panel-right"><%= delayed_orders %></span>
+        </p>
+
+        <% completed_orders = PartyOrder.where(:cooked => true).length %>
+
+        <p>Completed orders:
+          <span class="panel-right"><%= completed_orders %></span>
+        </p>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

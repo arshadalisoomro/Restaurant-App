@@ -4,16 +4,16 @@
 <h4 class="page-title"><%= @waiter.name %></h4>
 
 <div class="row">
-  <% @tables.each do |table| %>
+  <% @tables.sort.each do |table| %>
     <% if @parties.include?(table.id) %>
     <% @party = Party.where(:table_id => table.id, :has_paid => false)[0] %>
     <% partyTotal = 0 %>
       <div class="col-sm-4 panel panel-default clearfix">
         <form action="/waiters/<%= @party.id %>" method="post" role="form">
           <input type="hidden" name="_method" value="put">
-          <div class="panel-heading">Table
+          <div class="panel-heading party-header">Table
             <select name="party[table_id]" onchange="this.form.submit()">
-              <% Table.all.each do |table| %>
+              <% Table.where(:status => 'active').each do |table| %>
                 <% if table.id == @party.table_id %>
                   <option value="<%= table.id %>" selected><%= table.id %></option>
                 <% elsif @parties.include?(table.id) == false %>
@@ -135,7 +135,7 @@
         <form action="/waiters" method="post" role="form">
           <input type="hidden" name="party[table_id]" value="<%= table.id %>">
           <input type="hidden" name="party[waiter_id]" value="<%= @waiter.id %>">
-          <div class="panel-heading panel-empty">Table <%= table.id %> <span class="panel-right">Party of <select class="party-size-select" name="party[size]" required>
+          <div class="panel-heading party-header panel-empty">Table <%= table.id %> <span class="panel-right">Party of <select class="party-size-select" name="party[size]" required>
           <option value="" selected>0</option>
           <% 8.times do |i| %>
               <option value="<%= i + 1 %>"><%= i + 1 %></option>

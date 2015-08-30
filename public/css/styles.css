@@ -99,6 +99,7 @@ body {
   padding-left: 0;  /*idem*/
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 0;
   color: #ddd6f3;
 }
 
@@ -182,22 +183,21 @@ a:hover, a:active {
 }
 
 .panel-heading > .panel-right, .orderBottom .panel-right {
-  margin-right: 0;
+  margin-right: 5px;
 }
 
 .party-waiter-name {
   margin-left: 0;
   margin-top: 5px;
   margin-bottom: 5px;
-  font-size: 20px;
 }
 
 .party-waiter-select>select {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .party-header {
-  margin-left: 0;
+  margin-left: 5px;
 }
 
 .panel-heading select {
@@ -250,7 +250,7 @@ option {
 }
 
 .viewReceipt {
-  margin: 5% 0;
+  margin: 7% 0;
   font-size: 18px;
 }
 
@@ -428,7 +428,7 @@ label {
 }
 
 .form-control {
-  font-size: 18px;
+  line-height: normal !important;
 }
 
 .description-form-group {
@@ -507,6 +507,47 @@ th, td {
 
 .order-checkmark>span:hover {
   color: #870000;
+}
+
+/* Admin */
+
+.control-panel-heading {
+  text-align: center;
+}
+
+.prime-hire, .post-hire {
+  float: right;
+  margin-right: 5%;
+  font-size: 18px;
+  margin-bottom: 5%;
+}
+
+.post-hire {
+  display: none;
+}
+
+.new-hire {
+  width: 70%;
+  float: left;
+  font-size: 18px;
+  margin-top: 4px;
+  display: none;
+  margin-bottom: 5%;
+}
+
+.add-table, .remove-table {
+  font-size: 18px;
+  margin-bottom: 5%;
+}
+
+.add-table {
+  float: left;
+}
+
+.remove-table {
+  margin-right: 5%;
+  float: right;
+  margin-top: -5px;
 }
 
 @media (max-width: 767px) {
@@ -595,7 +636,7 @@ th, td {
   }
 }
 
-@media (max-width: 374px) {
+@media (max-width: 375px) {
   .kitchen-header {
     font-size: 16px;
   }
