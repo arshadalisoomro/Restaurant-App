@@ -1,0 +1,36 @@
+<div class="overlay"></div>
+
+<h4 class="page-title">Kitchen</h4>
+
+<table class="table table-hover">
+
+  <thead>
+    <tr>
+      <th class="kitchen-header">Order</th>
+      <th class="kitchen-header">Time</th>
+      <th class="kitchen-header">Dish</th>
+      <th class="kitchen-header">Table</th>
+      <th class="kitchen-header checkmark-header"><span class="glyphicon glyphicon-ok"></span></th>
+    </tr>
+  </thead>
+
+  <tbody class="kitchen">
+    <% @orders.each do |order| %>
+      <% time_since_order = ((Time.now.to_i - order.created_at.to_i) / 60) %>
+
+      <% if time_since_order >= 30 %>
+        <tr class="kitchen-row danger">
+      <% elsif time_since_order >= 15 %>
+        <tr class="kitchen-row warning">
+      <% else %>
+        <tr class="kitchen-row active">
+      <% end %>
+          <td class="kitchen-listing kitchen-order-number"><%= order.id %></td>
+          <td class="kitchen-listing kitchen-order-time"><%= order.created_at.strftime("%I:%M") %></td>
+          <td class="kitchen-listing kitchen-food-name"><%= Food.find(order.food_id).name %></td>
+          <td class="kitchen-listing"><%= Party.find(order.party_id).table_id %></td>
+          <td class="kitchen-listing order-checkmark" data-href="/kitchen/<%= order.id %>"><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
