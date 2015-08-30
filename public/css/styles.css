@@ -93,7 +93,7 @@ body {
   text-align: center;
   padding-right: 0; /*15px in bootstrap.css*/
   padding-left: 0;  /*idem*/
-  margin-right: -15px;
+  margin-right: auto;
   margin-left: auto;
   color: #ddd6f3;
 }
