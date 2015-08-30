@@ -429,6 +429,7 @@ label {
 
 .form-control {
   line-height: normal !important;
+  font-size: 18px;
 }
 
 .description-form-group {
