@@ -8,7 +8,7 @@ require './models/waiter'
 
 8.times {Table.create()}
 
-5.times {Waiter.create({name: Faker::Name.name})}
+3.times {Waiter.create({name: Faker::Name.name})}
 
 Party.create({table_id: 3, waiter_id: Waiter.all.sample.id, size: 4})
 Party.create({table_id: 2, waiter_id: Waiter.all.sample.id, size: 2})

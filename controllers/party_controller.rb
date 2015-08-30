@@ -11,10 +11,12 @@ class PartyController < ApplicationController
     end
   end
 
+  get '/:id' do
+    @party = Party.find(params[:id])
+    erb :'parties/receipt'
+  end
+
   post '/' do
-    if (params[:party].size == 0)
-      params[:party].size = 1
-    end
     @party = Party.create(params[:party])
     redirect '/'
   end

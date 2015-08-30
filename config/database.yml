@@ -1,5 +1,5 @@
 development:
   adapter: postgresql
-  database: not_chinese_food
+  database: restaurant_app
   encoding: utf-8
   pool: 5

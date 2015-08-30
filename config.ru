@@ -13,6 +13,7 @@ require './controllers/application_controller'
 require './controllers/landing_controller'
 require './controllers/party_controller'
 require './controllers/order_controller'
+require './controllers/waiter_controller'
 require './controllers/menu_controller'
 require './controllers/kitchen_controller'
 
@@ -21,5 +22,6 @@ require './controllers/kitchen_controller'
 map('/'){ run LandingController }
 map('/parties'){ run PartyController }
 map('/orders'){ run OrderController }
+map('/waiters'){ run WaiterController }
 map('/menu'){ run MenuController }
 map('/kitchen'){ run KitchenController }

@@ -1,0 +1,30 @@
+<div class="row">
+<% partyTotal = 0 %>
+  <div class="col-sm-4 col-sm-offset-4 panel panel-default clearfix">
+    <div class="panel-heading">
+      <div class="row party-header">
+        Table <%= @party.table_id %>
+        <span class="panel-right">Party of <%= @party.size %></span>
+      </div>
+    </div>
+
+    <div class="panel-info">
+      <% PartyOrder.where(:party_id => @party.id, :has_paid => false).each do |order| %>
+        <p>
+          <%= Food.find(order.food_id).name %>
+            <span class="panel-right">
+              $<%= sprintf('%.2f', Food.find(order.food_id).price) %>
+            </span>
+          <% partyTotal += Food.find(order.food_id).price %>
+        </p>
+      <% end %>
+      <div class="orderBottom clearfix"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="15% tip: $<%= sprintf('%.2f', (partyTotal * 0.15) + partyTotal) %><br>20% tip: $<%= sprintf('%.2f', (partyTotal * 0.20) + partyTotal) %><br>25% tip: $<%= sprintf('%.2f', (partyTotal * 0.25) + partyTotal) %>">
+        <form action="/parties/<%= @party.id %>" method="post" role="form">
+          <input type="hidden" name="_method" value="delete">
+          <input class="btn clearTable" type="submit" value="Clear table">
+        </form>
+        <p class="viewReceipt">Total: $<%= sprintf('%.2f', partyTotal) %></p>
+      </div>
+    </div>
+  </div>
+</div>

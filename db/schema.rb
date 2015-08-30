@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20150828233727) do
     t.string   "name"
     t.decimal  "price",       precision: 4, scale: 2
     t.string   "course"
-    t.string   "description",                         default: "disintermediate open-source markets"
+    t.string   "description",                         default: "enable seamless action-items"
     t.boolean  "on_menu",                             default: true
-    t.datetime "created_at",                                                                          null: false
-    t.datetime "updated_at",                                                                          null: false
+    t.datetime "created_at",                                                                   null: false
+    t.datetime "updated_at",                                                                   null: false
   end
 
   create_table "parties", force: :cascade do |t|

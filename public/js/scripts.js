@@ -6,11 +6,6 @@ $(document).ready(function() {
 
   $('ul.nav > li > a[href="' + (document.location.pathname[0] + document.location.pathname.split('/')[1]) + '"]').parent().addClass('active');
 
-  $(".nav a").on("click", function(){
-    $(".nav").find(".active").removeClass("active");
-    $(this).parent().addClass("active");
-  });
-
   $('.panel-heading').on('click', function() {
     $(this).find('select').addClass('focusedSelect');
     $(this).on('blur', function() { // this isn't working the way i want it to

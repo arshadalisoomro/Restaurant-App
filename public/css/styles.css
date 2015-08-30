@@ -5,6 +5,13 @@ body {
   min-height: 1000px;
 }
 
+.container {
+     padding-right: 0; /*15px in bootstrap.css*/
+     padding-left: 0;  /*idem*/
+     margin-right: auto;
+     margin-left: auto;
+}
+
 .clearfix:after {
   content: "";
   display: table;
@@ -49,6 +56,10 @@ body {
   font-size: 20px;
 }
 
+.dropdown {
+  cursor: pointer;
+}
+
 .dropdown-menu, .dropdown-menu li {
   width: 100%;
   text-align: center;
@@ -80,8 +91,10 @@ body {
 
 .jumbotron {
   text-align: center;
-  padding: 10px 40px;
-  margin-bottom: 0;
+  padding-right: 0; /*15px in bootstrap.css*/
+  padding-left: 0;  /*idem*/
+  margin-right: -15px;
+  margin-left: auto;
   color: #ddd6f3;
 }
 
@@ -135,8 +148,7 @@ a:hover, a:active {
   background: -o-linear-gradient(90deg, #190A05 10%, #190A05 90%);
   background: linear-gradient(90deg, #190A05 10%, #190A05 90%);
   color: whitesmoke;
-  border: none;
-  height: 50px;
+  /*border: none;*/
 }
 
 .btn {
@@ -169,6 +181,21 @@ a:hover, a:active {
   margin-right: 0;
 }
 
+.party-waiter-name {
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.party-waiter-select>select {
+  font-size: 20px;
+}
+
+.party-header {
+  margin-left: 0;
+}
+
 .panel-heading select {
   background-color: rgba(0,0,0,0);
   color: #222222;
@@ -197,9 +224,17 @@ option {
   font-size: 18px;
 }
 
+.party-waiter-select {
+  margin-right: 5%;
+}
+
+.party-waiter-select>select option {
+  text-align: center;
+}
+
 .orderBottom {
+  text-align: right;
   width: 95%;
-  color: green;
   margin-top: 2%;
   border-top: 1px solid #190A05;
 }
@@ -208,6 +243,16 @@ option {
   float: left;
   margin: 5% 0;
   font-size: 18px;
+}
+
+.viewReceipt {
+  margin: 5% 0;
+  font-size: 18px;
+}
+
+.suggestedTip {
+  font-size: 14px;
+  margin: -1% 0;
 }
 
 .orderBottom .panel-right {
