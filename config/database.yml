@@ -1,5 +1,5 @@
 development:
   adapter: postgresql
   database: restaurant_app
-  encoding: utf-8
+  encoding: UTF8
   pool: 5
